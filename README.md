@@ -80,15 +80,7 @@ Rules:
 - **Styling:** hand-written CSS (no UI framework) — a "paper ledger / receipt" visual identity built for this project
 - **Fonts:** Spectral (display), Inter (body), JetBrains Mono (numbers) via Google Fonts
 
-## f. Screenshots
-
-> Replace these with real screenshots (drag image files into `/screenshots` and update the paths below) before submitting. Take at least 3: the home page, a group with expenses logged, and the AI mediator message.
-
-![Home page](screenshots/home.png)
-![Group dashboard with balances](screenshots/group-dashboard.png)
-![AI mediator message](screenshots/mediator.png)
-
-## g. How to run the project
+## f. How to run the project
 
 ### 1. Clone and install
 
