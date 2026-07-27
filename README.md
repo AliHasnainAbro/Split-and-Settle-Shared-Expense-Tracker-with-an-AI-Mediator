@@ -13,8 +13,7 @@ Anyone who has shared a flat, a hostel room, or a trip with friends knows the pa
 
 ## b. Live URL
 
-**[[https://your-app-name.vercel.app](https://split-and-settle-expense-tracker.vercel.app/)]([https://your-app-name.vercel.app](https://split-and-settle-expense-tracker.vercel.app/))**
-
+**[[Split_and_Settle](https://split-and-settle-expense-tracker.vercel.app/)]**
 ## c. Features
 
 - **Create a group** in one step — just a group name and your own name.
