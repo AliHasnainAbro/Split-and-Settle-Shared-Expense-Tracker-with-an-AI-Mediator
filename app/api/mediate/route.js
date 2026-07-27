@@ -1,6 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@supabase/supabase-js";
 import { computeBalances } from "@/lib/balances";
+
+export const dynamic = "force-dynamic";
 
 const SYSTEM_PROMPT = `You are Sam, the mediator inside an app called Split & Settle that
 helps roommates and friend groups track shared expenses fairly.
@@ -37,26 +39,41 @@ Rules:
 
 export async function POST(req) {
   try {
+    const supabaseUrl =
+      process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey =
+      process.env.supabase_Anonkey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const anthropicApiKey =
+      process.env.Anthropic_api_key || process.env.ANTHROPIC_API_KEY;
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
     const { groupId } = await req.json();
     if (!groupId) {
       return Response.json({ error: "Missing groupId." }, { status: 400 });
     }
 
-    const [{ data: group }, { data: members }, { data: expenses }] =
-      await Promise.all([
-        supabase.from("groups").select("*").eq("id", groupId).single(),
-        supabase.from("members").select("*").eq("group_id", groupId),
-        supabase
-          .from("expenses")
-          .select("*")
-          .eq("group_id", groupId)
-          .order("created_at", { ascending: false })
-          .limit(25),
-      ]);
+    // Look up group by 6-character code (e.g. QY6FYF)
+    const { data: group } = await supabase
+      .from("groups")
+      .select("*")
+      .eq("code", groupId)
+      .single();
 
     if (!group) {
       return Response.json({ error: "Group not found." }, { status: 404 });
     }
+
+    // Use group.id for members & expenses queries
+    const [{ data: members }, { data: expenses }] = await Promise.all([
+      supabase.from("members").select("*").eq("group_id", group.id),
+      supabase
+        .from("expenses")
+        .select("*")
+        .eq("group_id", group.id)
+        .order("created_at", { ascending: false })
+        .limit(25),
+    ]);
 
     const balances = computeBalances(members || [], expenses || []);
     const memberNameById = Object.fromEntries(
@@ -87,10 +104,10 @@ ${balanceSummary || "No members yet."}
 Recent expenses:
 ${expenseSummary || "No expenses logged yet."}`;
 
-    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    const anthropic = new Anthropic({ apiKey: anthropicApiKey });
 
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-3-5-sonnet-20241022",
       max_tokens: 400,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userContent }],
