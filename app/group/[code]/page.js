@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, use } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { computeBalances } from "@/lib/balances";
 
 export default function GroupPage({ params }) {
-  const code = params.code.toUpperCase();
+  // Use React.use() to unwrap the async params object
+  const resolvedParams = use(params);
+  const code = resolvedParams.code.toUpperCase();
 
   const [group, setGroup] = useState(null);
   const [members, setMembers] = useState([]);
