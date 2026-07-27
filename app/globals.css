@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --paper: #f6f2e9;
+  --paper-dark: #ece5d3;
+  --ink: #1c2321;
+  --ink-soft: #4a534f;
+  --teal: #0f6b5c;
+  --teal-dark: #0a4d42;
+  --clay: #b5502f;
+  --rule: #d8cfb8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.display {
+  font-family: "Spectral", serif;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+}
+
+.title {
+  font-family: "Spectral", serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.1;
+  margin: 8px 0 4px;
+}
+
+.subtitle {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin: 0 0 32px;
+  max-width: 46ch;
+}
+
+.receipt {
+  background: #fffdf8;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 var(--rule), 0 12px 30px -18px rgba(28, 35, 33, 0.35);
+  position: relative;
+  padding: 28px 28px 22px;
+  margin-bottom: 28px;
+}
+
+.receipt::before,
+.receipt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0 4px,
+    var(--paper) 4px 8px
+  );
+}
+
+.receipt::before {
+  top: -1px;
+  transform: translateY(-100%);
+}
+
+.receipt::after {
+  bottom: -1px;
+  transform: translateY(100%);
+}
+
+.section-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px dashed var(--rule);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.field label {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+input,
+select {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+.row > * {
+  flex: 1;
+}
+
+button.primary {
+  background: var(--teal);
+  color: #fbfaf5;
+  border: none;
+  padding: 11px 18px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+button.primary:hover {
+  background: var(--teal-dark);
+}
+button.primary:disabled {
+  background: #b7c4bf;
+  cursor: not-allowed;
+}
+
+button.ghost {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  padding: 10px 16px;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button.ghost:hover {
+  border-color: var(--teal);
+}
+
+.ledger-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--rule);
+  font-size: 14px;
+}
+.ledger-line:last-child {
+  border-bottom: none;
+}
+
+.ledger-name {
+  font-weight: 500;
+}
+
+.balance-owed {
+  color: var(--teal-dark);
+  font-weight: 700;
+}
+.balance-owes {
+  color: var(--clay);
+  font-weight: 700;
+}
+.balance-even {
+  color: var(--ink-soft);
+}
+
+.expense-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+}
+.expense-row:last-child {
+  border-bottom: none;
+}
+.expense-meta {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.code-pill {
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  background: var(--paper-dark);
+  border: 1px solid var(--rule);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.mediator-box {
+  background: #fbfaf5;
+  border-left: 3px solid var(--teal);
+  padding: 16px 18px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  border-radius: 2px;
+}
+
+.error-text {
+  color: var(--clay);
+  font-size: 13px;
+}
+
+.footer-note {
+  color: var(--ink-soft);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 40px;
+}
