@@ -1,8 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@supabase/supabase-js";
 import { computeBalances } from "@/lib/balances";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
+
 const SYSTEM_PROMPT = `You are Sam, the mediator inside an app called Split & Settle that
 helps roommates and friend groups track shared expenses fairly.
 
@@ -38,6 +39,12 @@ Rules:
 
 export async function POST(req) {
   try {
+    // Initialize Supabase inside POST handler to avoid build-time top-level failure
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+
     const { groupId } = await req.json();
     if (!groupId) {
       return Response.json({ error: "Missing groupId." }, { status: 400 });
@@ -91,7 +98,7 @@ ${expenseSummary || "No expenses logged yet."}`;
     const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-6",
+      model: "claude-3-5-sonnet-20241022",
       max_tokens: 400,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userContent }],
