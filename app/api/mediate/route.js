@@ -2,6 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { supabase } from "@/lib/supabaseClient";
 import { computeBalances } from "@/lib/balances";
 
+export const dynamic = 'force-dynamic';
 const SYSTEM_PROMPT = `You are Sam, the mediator inside an app called Split & Settle that
 helps roommates and friend groups track shared expenses fairly.
 
