@@ -1,0 +1,2 @@
+# Split-and-Settle-Shared-Expense-Tracker-with-an-AI-Mediator
+it's an AI mediator that:  Reads the group's expense history Detects patterns (e.g., "Ali pays for groceries, Sara always pays for wifi") Generates a diplomatically-worded settlement message people can actually send ("Hey, now it's your turn to cover the electricity bill") Flags fairness issues ("You've covered 70% of shared costs this month")
