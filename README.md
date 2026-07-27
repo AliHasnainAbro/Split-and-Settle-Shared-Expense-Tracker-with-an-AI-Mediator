@@ -13,7 +13,7 @@ Anyone who has shared a flat, a hostel room, or a trip with friends knows the pa
 
 ## b. Live URL
 
-**[https://your-app-name.vercel.app](https://your-app-name.vercel.app)** ← replace this with your real deployed URL before submitting.
+**[https://your-app-name.vercel.app]([https://your-app-name.vercel.app](https://split-and-settle-expense-tracker.vercel.app/))**
 
 ## c. Features
 
