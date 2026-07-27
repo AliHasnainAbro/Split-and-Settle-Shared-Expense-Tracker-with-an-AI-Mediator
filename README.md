@@ -13,7 +13,7 @@ Anyone who has shared a flat, a hostel room, or a trip with friends knows the pa
 
 ## b. Live URL
 
-**<a href="[https://split-and-settle-expense-tracker.vercel.app/]" target="_blank" rel="noopener noreferrer">Split and Settle</a>**
+**<a href="https://split-and-settle-expense-tracker.vercel.app/" target="_blank" rel="noopener noreferrer">Split and Settle</a>**
 
 ## c. Features
 
