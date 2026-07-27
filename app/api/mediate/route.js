@@ -39,11 +39,12 @@ Rules:
 
 export async function POST(req) {
   try {
-    // Initialize Supabase inside POST handler to avoid build-time top-level failure
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
+    // Initialized using your exact Vercel environment variable names
+    const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.supabase_Anonkey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const anthropicApiKey = process.env.Anthropic_api_key || process.env.ANTHROPIC_API_KEY;
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const { groupId } = await req.json();
     if (!groupId) {
@@ -95,7 +96,7 @@ ${balanceSummary || "No members yet."}
 Recent expenses:
 ${expenseSummary || "No expenses logged yet."}`;
 
-    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    const anthropic = new Anthropic({ apiKey: anthropicApiKey });
 
     const response = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20241022",
